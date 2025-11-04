@@ -25,11 +25,10 @@ classifiers = [
   "Operating System :: OS Independent",
   "Topic :: Utilities",
 ]
-urls = {
-  Homepage = "https://github.com/tos-kamiya/newer",
-  Repository = "https://github.com/tos-kamiya/newer",
-  Issues = "https://github.com/tos-kamiya/newer/issues"
-}
+[project.urls]
+Homepage = "https://github.com/tos-kamiya/newer"
+Repository = "https://github.com/tos-kamiya/newer"
+Issues = "https://github.com/tos-kamiya/newer/issues"
 dependencies = [
   "python-magic",
 ]
