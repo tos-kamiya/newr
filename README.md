@@ -110,7 +110,7 @@ For other kinds (such as `image`, `audio`, `video`, `text`), all files whose MIM
 
 ## Changelog
 
-Unreleased: Replaced `--newest/--oldest` with unified `--number` and `--reverse` options.
+v0.3.0: Renamed project to `newer` and replaced `--newest/--oldest` with unified `--number` and `--reverse` options.
 
 ## License
 

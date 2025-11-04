@@ -114,7 +114,7 @@ MIMEタイプの「/」の前の部分（例: `image/`, `audio/` など）が一
 
 ## 更新履歴
 
-開発中: `--newest/--oldest` を統合し、`--number` と `--reverse` オプションに刷新。
+v0.3.0: プロジェクト名を `newer` に変更し、`--newest/--oldest` を統合して `--number` と `--reverse` オプションを導入。
 
 ## ライセンス
 
