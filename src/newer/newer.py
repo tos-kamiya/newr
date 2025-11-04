@@ -70,13 +70,24 @@ def parse_argv() -> Tuple[argparse.Namespace, argparse.ArgumentParser]:
         Tuple[argparse.Namespace, argparse.ArgumentParser]: Parsed arguments and parser instance.
     """
     p = argparse.ArgumentParser(
-        description="Select files by modification time, with advanced kind filtering and flexible slicing.",
+        description="Select files by modification time, with optional reverse order and kind filtering.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    group = p.add_mutually_exclusive_group()
-    group.add_argument("-n", "--newest", type=int, help="Select top N newest files")
-    group.add_argument("-o", "--oldest", type=int, help="Select top N oldest files")
+    p.add_argument(
+        "-n",
+        "--number",
+        type=int,
+        default=1,
+        metavar="N",
+        help="Number of files to select (default: %(default)s)",
+    )
+    p.add_argument(
+        "-r",
+        "--reverse",
+        action="store_true",
+        help="Select in ascending (oldest-first) order",
+    )
     p.add_argument("-k", "--kind", type=str, help="File kind: doc/xls/ppt/zip/image/video/audio/text")
     p.add_argument("-q", "--quiet", action="store_true", help="Suppress all log output to stderr")
     p.add_argument("file", nargs="+", help="Files/glob patterns")
@@ -92,14 +103,8 @@ def parse_argv() -> Tuple[argparse.Namespace, argparse.ArgumentParser]:
     if not args.file:
         p.error("No file patterns provided.")
 
-    if args.oldest is not None:
-        if args.oldest <= 0:
-            p.error("-o/--oldest must be a positive integer")
-        args.newest = -args.oldest
-    elif args.newest is None:
-        args.newest = 1
-    elif args.newest == 0:
-        p.error("-n/--newest must not be zero")
+    if args.number <= 0:
+        p.error("-n/--number must be a positive integer")
 
     return args, p
 
@@ -128,11 +133,11 @@ def main() -> None:
     all_files = sorted(
         all_files,
         key=lambda f: os.stat(f).st_mtime,
-        reverse=args.newest > 0,
+        reverse=not args.reverse,
     )
 
     # Step 3: Apply kind filter if specified, and select files by slice/count
-    needed = abs(args.newest)
+    needed = args.number
     selected: List[str] = []
     if args.kind:
         kind_checker = get_kind_checker(args.kind)

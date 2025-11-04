@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "latest"
+name = "newer"
 dynamic = ["version"]
 description = ''
 readme = "README.md"
@@ -19,13 +19,13 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-urls = {Homepage = "https://github.com/tos-kamiya/latest"}
+urls = {Homepage = "https://github.com/tos-kamiya/newer"}
 dependencies = [
   "python-magic",
 ]
 
 [tool.hatch.version]
-path = "src/latest/__about__.py"
+path = "src/newer/__about__.py"
 
 [project.scripts]
-latest = "latest:main"
+newer = "newer:main"

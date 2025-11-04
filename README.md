@@ -1,13 +1,13 @@
-# latest
+# newer
 
 *“Need to copy the last three images I downloaded—uh, what were the extensions again?”*
 
-A command-line file selector that allows you to pick files by modification time, with optional filtering by file type (kind) and flexible selection (newest/oldest N).
+`newer` is a command-line file selector that allows you to pick files by modification time, with optional filtering by file type (kind) and flexible selection with count and order controls.
 Supports glob patterns and MIME-type based filtering for documents, spreadsheets, presentations, and archives.
 
 ## Features
 
-* Select **the newest N files** (or oldest N files) matching given patterns.
+* Select files by modification time with a configurable count and optional oldest-first ordering.
 * Filter files by kind (`doc`, `xls`, `ppt`, `zip`, etc.) based on MIME type.
 * Supports glob patterns and multiple input files.
 * Quiet mode and empty-result-safe mode.
@@ -18,7 +18,7 @@ Supports glob patterns and MIME-type based filtering for documents, spreadsheets
 You can install the latest version using `pipx`:
 
 ```sh
-pipx install http://github.com/tos-kamiya/latest
+pipx install http://github.com/tos-kamiya/newer
 ```
 
 **Note on Dependencies**
@@ -30,7 +30,7 @@ For more details, please refer to the [official python-magic page](https://githu
 ## Usage
 
 ```sh
-latest [OPTIONS] FILES...
+newer [OPTIONS] FILES...
 ```
 
 ### Examples
@@ -38,25 +38,25 @@ latest [OPTIONS] FILES...
 * Show the newest `.pdf` file in Downloads:
 
   ```sh
-  latest --newest 1 ~/Downloads/*.pdf
+  newer -n 1 ~/Downloads/*.pdf
   ```
 
 * Show the 3 oldest `.docx` files:
 
   ```sh
-  latest --oldest 3 ~/Documents/*.docx
+  newer -n 3 --reverse ~/Documents/*.docx
   ```
 
 * Show the newest spreadsheet file (`xls` kind: `.xlsx`, `.xls`, `.ods`):
 
   ```sh
-  latest -k xls --newest 1 ~/Downloads/*
+  newer -k xls -n 1 ~/Downloads/*
   ```
 
 * Quiet mode (no log output), allow empty result:
 
   ```sh
-  latest -q -0 -k ppt --newest 1 ~/Downloads/*
+  newer -q -0 -k ppt -n 1 ~/Downloads/*
   ```
 
 **Copy the newest image file in your `~/Pictures` folder to the current directory**
@@ -64,13 +64,13 @@ latest [OPTIONS] FILES...
 * **Fish shell:**
 
   ```fish
-  cp (latest -k image --newest 1 ~/Pictures/*) .
+  cp (newer -k image -n 1 ~/Pictures/*) .
   ```
 
 * **Bash:**
 
   ```bash
-  cp $(latest -k image --newest 1 ~/Pictures/*) .
+  cp $(newer -k image -n 1 ~/Pictures/*) .
   ```
 
 > The `-k image` option selects any file recognized as an image (such as `.jpg`, `.jpeg`, `.png`, `.gif`, etc.) based on its MIME type.
@@ -78,13 +78,11 @@ latest [OPTIONS] FILES...
 
 ## Options
 
-* `-n, --newest N`
-  Select the newest N files (default: 1).
+* `-n N, --number N`
+  Select this many files (default: 1).
 
-* `-o, --oldest N`
-  Select the oldest N files.
-
-  > Note: `--newest` and `--oldest` cannot be used together.
+* `-r, --reverse`
+  Sort in ascending (oldest-first) order before selecting files.
 
 * `-k, --kind KIND`
   Filter files by kind:
@@ -112,7 +110,7 @@ For other kinds (such as `image`, `audio`, `video`, `text`), all files whose MIM
 
 ## Changelog
 
-v0.2.0: `--number/-n` was renamed to `--newest/-n`; `--oldest/-o` was newly added.
+Unreleased: Replaced `--newest/--oldest` with unified `--number` and `--reverse` options.
 
 ## License
 

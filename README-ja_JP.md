@@ -1,14 +1,14 @@
-# latest
+# newer
 
 *「さっきダウンロードした画像ファイル3つをコピーしたいんだけど、拡張子は何だったっけ？」*
 
-コマンドラインからファイルの更新日時（最終変更時刻）で簡単にファイルを選択できるツールです。
-ファイル種別（kind）によるフィルタリングや、「最新／最古N件」の選択、globパターンによるファイル指定が可能です。
+コマンドラインからファイルの更新日時（最終変更時刻）で簡単にファイルを選択できるツール `newer` です。
+ファイル種別（kind）によるフィルタリングや、選択する件数と並び順の制御、globパターンによるファイル指定が可能です。
 ドキュメント・スプレッドシート・プレゼン資料・アーカイブファイルなどのMIMEタイプを元にしたフィルタもサポートします。
 
 ## 特長
 
-* 指定したパターンに一致するファイルの中から、**最新のN個** (または、古い方から N 個)を選択できます。
+* 指定したパターンに一致するファイルの中から、**更新日時順に任意の件数**を選択できます（古い順にすることも可能）。
 * MIMEタイプに基づき、`doc`、`xls`、`ppt`、`zip` などの種別でファイルを絞り込めます。
 * 複数のファイルやglobパターンをサポート。
 * ログを出さない「クワイエットモード」や、ファイルが見つからない場合にもエラーとしないオプションあり。
@@ -21,7 +21,7 @@
 `pipx` を使って最新版をインストールできます：
 
 ```sh
-pipx install http://github.com/tos-kamiya/latest
+pipx install http://github.com/tos-kamiya/newer
 ```
 
 **依存ライブラリについて**
@@ -33,7 +33,7 @@ pipx install http://github.com/tos-kamiya/latest
 ## 使い方
 
 ```sh
-latest [オプション] ファイル...
+newer [オプション] ファイル...
 ```
 
 ### 使用例
@@ -41,25 +41,25 @@ latest [オプション] ファイル...
 * Downloads フォルダ内で最も新しい `.pdf` ファイルを表示：
 
   ```sh
-  latest --newest 1 ~/Downloads/*.pdf
+  newer -n 1 ~/Downloads/*.pdf
   ```
 
 * `~/Documents` 内で最も古い `.docx` ファイルを3件表示：
 
   ```sh
-  latest --oldest 3 ~/Documents/*.docx
+  newer -n 3 --reverse ~/Documents/*.docx
   ```
 
 * "xls" 種別（表計算ファイル。`.xlsx`、`.xls`、`.ods` を含む）で最新のファイルを表示：
 
   ```sh
-  latest -k xls --newest 1 ~/Downloads/*
+  newer -k xls -n 1 ~/Downloads/*
   ```
 
 * ログ出力なしで、`ppt` 種別の最新ファイルを、ファイルが見つからなくてもエラーにせず表示：
 
   ```sh
-  latest -q -0 -k ppt --newest 1 ~/Downloads/*
+  newer -q -0 -k ppt -n 1 ~/Downloads/*
   ```
 
 **Picturesフォルダ内の最新の画像ファイルをカレントディレクトリにコピーする例**
@@ -67,13 +67,13 @@ latest [オプション] ファイル...
 * **Fishシェルの場合:**
 
   ```fish
-  cp (latest -k image --newest 1 ~/Pictures/*) .
+  cp (newer -k image -n 1 ~/Pictures/*) .
   ```
 
 * **Bashの場合:**
 
   ```bash
-  cp $(latest -k image --newest 1 ~/Pictures/*) .
+  cp $(newer -k image -n 1 ~/Pictures/*) .
   ```
 
 > `-k image` オプションは、MIMEタイプが画像（`.jpg`, `.jpeg`, `.png`, `.gif` など）と判定されるファイルすべてを対象とします。
@@ -81,13 +81,11 @@ latest [オプション] ファイル...
 
 ## オプション
 
-* `-n, --newest N`
-  **新しい順**で上位N件のファイルを選択します（デフォルトは1）。
+* `-n N, --number N`
+  選択するファイル数を指定します（デフォルトは1）。
 
-* `-o, --oldest N`
-  **古い順**で上位N件のファイルを選択します。
-
-  ※ `--newest` と `--oldest` は同時に指定できません。
+* `-r, --reverse`
+  古い順（昇順）に並べ替えてからファイルを選択します。
 
 * `-k, --kind KIND`
   ファイル種別でフィルタします。
@@ -116,7 +114,7 @@ MIMEタイプの「/」の前の部分（例: `image/`, `audio/` など）が一
 
 ## 更新履歴
 
-v0.2.0 `--number/-n` オプションは `--newest/-n` に名称変更。`--oldest/-n`を新規追加。
+開発中: `--newest/--oldest` を統合し、`--number` と `--reverse` オプションに刷新。
 
 ## ライセンス
 
