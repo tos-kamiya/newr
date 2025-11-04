@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "newer"
+name = "newr"
 dynamic = ["version"]
 description = "Select files by modification time with kind filtering and flexible ordering."
 readme = "README.md"
@@ -30,12 +30,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tos-kamiya/newer"
-Repository = "https://github.com/tos-kamiya/newer"
-Issues = "https://github.com/tos-kamiya/newer/issues"
+Homepage = "https://github.com/tos-kamiya/newr"
+Repository = "https://github.com/tos-kamiya/newr"
+Issues = "https://github.com/tos-kamiya/newr/issues"
 
 [tool.hatch.version]
-path = "src/newer/__about__.py"
+path = "src/newr/__about__.py"
 
 [project.scripts]
-newer = "newer:main"
+newr = "newr:main"

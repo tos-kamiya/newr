@@ -1,8 +1,8 @@
-# newer
+# newr
 
 *“Need to copy the last three images I downloaded—uh, what were the extensions again?”*
 
-`newer` is a command-line file selector that allows you to pick files by modification time, with optional filtering by file type (kind) and flexible selection with count and order controls.
+`newr` is a command-line file selector that allows you to pick files by modification time, with optional filtering by file type (kind) and flexible selection with count and order controls.
 Supports glob patterns and MIME-type based filtering for documents, spreadsheets, presentations, and archives.
 
 ## Features
@@ -18,7 +18,7 @@ Supports glob patterns and MIME-type based filtering for documents, spreadsheets
 You can install the latest version using `pipx`:
 
 ```sh
-pipx install http://github.com/tos-kamiya/newer
+pipx install http://github.com/tos-kamiya/newr
 ```
 
 **Note on Dependencies**
@@ -30,7 +30,7 @@ For more details, please refer to the [official python-magic page](https://githu
 ## Usage
 
 ```sh
-newer [OPTIONS] FILES...
+newr [OPTIONS] FILES...
 ```
 
 ### Examples
@@ -38,25 +38,25 @@ newer [OPTIONS] FILES...
 * Show the newest `.pdf` file in Downloads:
 
   ```sh
-  newer -n 1 ~/Downloads/*.pdf
+  newr -n 1 ~/Downloads/*.pdf
   ```
 
 * Show the 3 oldest `.docx` files:
 
   ```sh
-  newer -n 3 --reverse ~/Documents/*.docx
+  newr -n 3 --reverse ~/Documents/*.docx
   ```
 
 * Show the newest spreadsheet file (`xls` kind: `.xlsx`, `.xls`, `.ods`):
 
   ```sh
-  newer -k xls -n 1 ~/Downloads/*
+  newr -k xls -n 1 ~/Downloads/*
   ```
 
 * Quiet mode (no log output), allow empty result:
 
   ```sh
-  newer -q -0 -k ppt -n 1 ~/Downloads/*
+  newr -q -0 -k ppt -n 1 ~/Downloads/*
   ```
 
 **Copy the newest image file in your `~/Pictures` folder to the current directory**
@@ -64,13 +64,13 @@ newer [OPTIONS] FILES...
 * **Fish shell:**
 
   ```fish
-  cp (newer -k image -n 1 ~/Pictures/*) .
+  cp (newr -k image -n 1 ~/Pictures/*) .
   ```
 
 * **Bash:**
 
   ```bash
-  cp $(newer -k image -n 1 ~/Pictures/*) .
+  cp $(newr -k image -n 1 ~/Pictures/*) .
   ```
 
 > The `-k image` option selects any file recognized as an image (such as `.jpg`, `.jpeg`, `.png`, `.gif`, etc.) based on its MIME type.
@@ -110,6 +110,7 @@ For other kinds (such as `image`, `audio`, `video`, `text`), all files whose MIM
 
 ## Changelog
 
+v0.4.0: Renamed project to `newr` and updated CLI/tooling references.
 v0.3.0: Renamed project to `newer` and replaced `--newest/--oldest` with unified `--number` and `--reverse` options.
 
 ## License

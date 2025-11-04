@@ -1,8 +1,8 @@
-# newer
+# newr
 
 *「さっきダウンロードした画像ファイル3つをコピーしたいんだけど、拡張子は何だったっけ？」*
 
-コマンドラインからファイルの更新日時（最終変更時刻）で簡単にファイルを選択できるツール `newer` です。
+コマンドラインからファイルの更新日時（最終変更時刻）で簡単にファイルを選択できるツール `newr` です。
 ファイル種別（kind）によるフィルタリングや、選択する件数と並び順の制御、globパターンによるファイル指定が可能です。
 ドキュメント・スプレッドシート・プレゼン資料・アーカイブファイルなどのMIMEタイプを元にしたフィルタもサポートします。
 
@@ -21,7 +21,7 @@
 `pipx` を使って最新版をインストールできます：
 
 ```sh
-pipx install http://github.com/tos-kamiya/newer
+pipx install http://github.com/tos-kamiya/newr
 ```
 
 **依存ライブラリについて**
@@ -33,7 +33,7 @@ pipx install http://github.com/tos-kamiya/newer
 ## 使い方
 
 ```sh
-newer [オプション] ファイル...
+newr [オプション] ファイル...
 ```
 
 ### 使用例
@@ -41,25 +41,25 @@ newer [オプション] ファイル...
 * Downloads フォルダ内で最も新しい `.pdf` ファイルを表示：
 
   ```sh
-  newer -n 1 ~/Downloads/*.pdf
+  newr -n 1 ~/Downloads/*.pdf
   ```
 
 * `~/Documents` 内で最も古い `.docx` ファイルを3件表示：
 
   ```sh
-  newer -n 3 --reverse ~/Documents/*.docx
+  newr -n 3 --reverse ~/Documents/*.docx
   ```
 
 * "xls" 種別（表計算ファイル。`.xlsx`、`.xls`、`.ods` を含む）で最新のファイルを表示：
 
   ```sh
-  newer -k xls -n 1 ~/Downloads/*
+  newr -k xls -n 1 ~/Downloads/*
   ```
 
 * ログ出力なしで、`ppt` 種別の最新ファイルを、ファイルが見つからなくてもエラーにせず表示：
 
   ```sh
-  newer -q -0 -k ppt -n 1 ~/Downloads/*
+  newr -q -0 -k ppt -n 1 ~/Downloads/*
   ```
 
 **Picturesフォルダ内の最新の画像ファイルをカレントディレクトリにコピーする例**
@@ -67,13 +67,13 @@ newer [オプション] ファイル...
 * **Fishシェルの場合:**
 
   ```fish
-  cp (newer -k image -n 1 ~/Pictures/*) .
+  cp (newr -k image -n 1 ~/Pictures/*) .
   ```
 
 * **Bashの場合:**
 
   ```bash
-  cp $(newer -k image -n 1 ~/Pictures/*) .
+  cp $(newr -k image -n 1 ~/Pictures/*) .
   ```
 
 > `-k image` オプションは、MIMEタイプが画像（`.jpg`, `.jpeg`, `.png`, `.gif` など）と判定されるファイルすべてを対象とします。
@@ -114,6 +114,7 @@ MIMEタイプの「/」の前の部分（例: `image/`, `audio/` など）が一
 
 ## 更新履歴
 
+v0.4.0: プロジェクト名を `newr` に変更し、関連する CLI/ツールの参照を更新。
 v0.3.0: プロジェクト名を `newer` に変更し、`--newest/--oldest` を統合して `--number` と `--reverse` オプションを導入。
 
 ## ライセンス

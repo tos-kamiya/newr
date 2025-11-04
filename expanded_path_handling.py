@@ -14,7 +14,7 @@ from typing import List, Optional, Callable, Tuple, Dict
 import magic
 
 try:
-    from .__about__ import __version__
+    from newr.__about__ import __version__
 except Exception:
     __version__ = "(unknown)"
 
