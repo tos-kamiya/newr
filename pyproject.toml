@@ -25,13 +25,14 @@ classifiers = [
   "Operating System :: OS Independent",
   "Topic :: Utilities",
 ]
+dependencies = [
+  "python-magic",
+]
+
 [project.urls]
 Homepage = "https://github.com/tos-kamiya/newer"
 Repository = "https://github.com/tos-kamiya/newer"
 Issues = "https://github.com/tos-kamiya/newer/issues"
-dependencies = [
-  "python-magic",
-]
 
 [tool.hatch.version]
 path = "src/newer/__about__.py"
